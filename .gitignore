@@ -1,0 +1,14 @@
+
+Mathias/SE/*
+Mathias/DB/.metadata/*
+
+
+
+
+Mathias/DB/RemoteSystemsTempFiles/*
+
+
+Mathias/DB/JDBC-Test/.settings/*
+*.class
+*.classpath
+*.project
