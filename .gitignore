@@ -12,3 +12,5 @@ Mathias/DB/JDBC-Test/.settings/*
 *.class
 *.classpath
 *.project
+
+Mathias/DB/.recommenders/*
