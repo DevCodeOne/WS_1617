@@ -1,11 +1,11 @@
 
-public class Vector {
+public class Vektor {
 
 	private double x = 0, y = 0, z = 0;
 	/**
 	 * Standartkonstruktor ohne werte
 	 */
-	public Vector() {
+	public Vektor() {
 
 	}
 
@@ -17,7 +17,7 @@ public class Vector {
 	 * @param y
 	 *            Y-Achse
 	 */
-	public Vector(double x, double y) {
+	public Vektor(double x, double y) {
 		this.x = x;
 		this.y =y;
 	}
@@ -32,7 +32,7 @@ public class Vector {
 	 * @param z
 	 *            Z-Achse
 	 */
-	public Vector(double x, double y, double z) {
+	public Vektor(double x, double y, double z) {
 		this.x = x;
 		this.y =y;
 		this.z=z;
@@ -45,7 +45,7 @@ public class Vector {
 	 *            zu addierender Vector
 	 * @return this
 	 */
-	public Vector addVec(Vector v) {
+	public Vektor addVec(Vektor v) {
 		this.x += v.getX();
 		this.y += v.getY();
 		this.z += v.getZ();
@@ -59,7 +59,7 @@ public class Vector {
 	 * @return Vector
 	 */
 
-	public Vector mult(double p) {
+	public Vektor mult(double p) {
 		this.x *= p;
 		this.y *= p;
 		this.z *= p;
@@ -73,7 +73,7 @@ public class Vector {
 	 *            Vector
 	 * @return doublewert
 	 */
-	public double scalarProd(Vector v) {
+	public double scalarProd(Vektor v) {
 		return (this.getX() * v.getX() + this.getY() * v.getY() + this.getZ() * v.getZ());
 	}
 
@@ -82,8 +82,8 @@ public class Vector {
 	 * 
 	 * @return Normale als Vector
 	 */
-	public static Vector normGerade(Vector v1) {
-		Vector n = new Vector(v1.getY(),v1.getX()*-1);
+	public static Vektor normGerade(Vektor v1) {
+		Vektor n = new Vektor(v1.getY(),v1.getX()*-1);
 		return n;
 	}
 
@@ -92,9 +92,9 @@ public class Vector {
 	 * 
 	 * @return Normale als Vector
 	 */
-	public static Vector normEbene(Vector v1, Vector v2) {
+	public static Vektor normEbene(Vektor v1, Vektor v2) {
 
-		return Vector.Vektorprodukt(v1, v2);
+		return Vektor.Vektorprodukt(v1, v2);
 	}
 
 	/**
@@ -112,8 +112,8 @@ public class Vector {
 	 * @return Vektor 3
 	 */
 
-	public static Vector Vektorprodukt(Vector v1, Vector v2){
-		Vector v3 = new Vector();
+	public static Vektor Vektorprodukt(Vektor v1, Vektor v2){
+		Vektor v3 = new Vektor();
 		v3.setX(v1.getY()*v2.getZ()-v1.getZ()*v2.getY());
 		v3.setY(v1.getZ()*v2.getX()-v1.getX()*v2.getZ());
 		v3.setZ(v1.getX()*v2.getY()-v1.getY()*v2.getX());
@@ -125,7 +125,7 @@ public class Vector {
 	 * @param v2 Vektor 2
 	 * @return Winkel dazwischen
 	 */
-	public static double Zwischenwinkel(Vector v1, Vector v2){
+	public static double Zwischenwinkel(Vektor v1, Vektor v2){
 		return ((Math.acos(v1.scalarProd(v2)/(v1.laenge()*v2.laenge()))/(2*Math.PI))*360);
 	}
 
@@ -135,7 +135,7 @@ public class Vector {
 	 * @param v2 Vektor 2
 	 * @return vektor
 	 */
-	public static Vector Orthogonalprojektion(Vector v1, Vector v2){
+	public static Vektor Orthogonalprojektion(Vektor v1, Vektor v2){
 		return v2.mult(v1.scalarProd(v2)/Math.pow(v2.laenge(),2));
 
 	}
