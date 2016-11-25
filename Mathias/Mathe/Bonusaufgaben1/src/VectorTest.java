@@ -102,14 +102,13 @@ public class VectorTest {
 	
 	@Test
 	public void Orthogonalprojektion() {		
-		Vector v1 = new Vector(3,-1);
-		Vector v2 = new Vector(-2,-1);
+		Vector v1 = new Vector(6,2);
+		Vector v2 = new Vector(3,-9);
 		Vector v3 = Vector.Orthogonalprojektion(v1, v2);	
 		double x = v3.getX();
 		double y = v3.getY();
 		double z = v3.getZ();
-		System.out.println(" " + x + " " + y );
-		assertTrue(true);			
+		assertTrue(x == 0&&y == 0);			
 	}
 
 }
