@@ -15,6 +15,7 @@ public class HochschulApp_b {
 		Statement s1 = conn.createStatement();
 		ResultSet rs1 = s1.executeQuery (stmt1);
 		ausgeben(rs1);
+		sc.close();
 		s1.close();
 		rs1.close();		
 	}

@@ -1,10 +1,4 @@
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Scanner;
 
 public class HochschulApp_c {
@@ -40,7 +34,7 @@ public class HochschulApp_c {
 		System.out.println("1. Dozenten anzeigen");
 		System.out.println("2. Studenten anzeigen");
 		System.out.println("3. Veranstaltungen anzeigen");
-		System.out.println("4. Datensatz in Dozent hinzufügen");
+		System.out.println("4. Datensatz Dozent hinzufügen");
 		System.out.println("0. Beenden");
 
 		while(true){
@@ -54,28 +48,31 @@ public class HochschulApp_c {
 			case 1:{
 				stmt1 = "select * from Dozent";
 				rs1 = s1.executeQuery(stmt1);
+				ausgeben(rs1);
 				break;
 			}
 			case 2:{
 				stmt1 = "select * from Student";
 				rs1 = s1.executeQuery(stmt1);
+				ausgeben(rs1);
 				break;
 			}
 			case 3:{
 				stmt1 = "select * from Veranstaltung natural join studiengang";
 				rs1 = s1.executeQuery(stmt1);
+				ausgeben(rs1);
 				break;
 			}
 			case 4:{
-				stmt1 = "update table dozent values (?,?,?,?,?,?,?,?,?,?)";
+				stmt1 = "insert into dozent (name,vorname,gebdat,geschlecht,buero,telnr,email,einstelldatum,fachgebiet,fbnr) values (?,?,?,?,?,?,?,?,?,?)";
 				PreparedStatement ps1 = conn.prepareStatement (stmt1);
 				System.out.print("Name: ");
 				ps1.setString(1, sc.next());
 				System.out.print("\nVorname: ");
 				ps1.setString(2, sc.next());
-				System.out.print("\nGeburtsdatum (Format yyyy-mm-dd: ");
-				ps1.setDate(3, Date.valueOf(sc.toString()));
-				System.out.print("\nGeschlecht (M oder W: ");
+				System.out.print("\nGeburtsdatum (Format dd.mm.yyyy): ");
+				ps1.setString(3, sc.next());
+				System.out.print("\nGeschlecht (M oder W): ");
 				ps1.setString(4, sc.next());
 				System.out.print("\nBueronummer: ");
 				ps1.setString(5, sc.next());
@@ -83,8 +80,8 @@ public class HochschulApp_c {
 				ps1.setString(6, sc.next());
 				System.out.print("\nE-Mail: ");
 				ps1.setString(7, sc.next());
-				System.out.print("\nGeburtsdatum (Format yyyy-mm-dd: ");
-				ps1.setDate(8, Date.valueOf(sc.toString()));
+				System.out.print("\nEinstelldatum (Format dd.mm.yyyy): ");
+				ps1.setString(8, sc.next());
 				System.out.print("\nFachgebiet: ");
 				ps1.setString(9, sc.next());
 				System.out.print("\nNr des Fachbereichs: ");
@@ -93,7 +90,7 @@ public class HochschulApp_c {
 				ps1.setInt(10, sc.nextInt());
 
 				//,einstelldatum DATE, fachgebiet VARCHAR(30), fachbereich VARCHAR(30)
-				rs1 = ps1.executeQuery();
+				System.out.println("Zeilen wurden geändert:" + ps1.executeUpdate());
 				break;
 			}
 			default: {
@@ -102,7 +99,7 @@ public class HochschulApp_c {
 			}	
 			}
 
-			ausgeben(rs1);	
+				
 			rs1.close();
 		}
 
