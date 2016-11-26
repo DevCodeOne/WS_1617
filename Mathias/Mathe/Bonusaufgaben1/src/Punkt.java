@@ -5,9 +5,9 @@ public class Punkt {
 	private double zKoord;
 
 	/**
-	 * Leerer Standartkonstuktor
+	 * Leerer Standartkonstruktor
 	 */
-	public Punkt(){
+	public Punkt() {
 		xKoord = 0;
 		yKoord = 0;
 		zKoord = 0;
@@ -15,10 +15,13 @@ public class Punkt {
 
 	/**
 	 * Konstruktor zur Erstellung eines Punktes in der Ebene
-	 * @param x X-Koordinate
-	 * @param y Y-Koordinate
+	 * 
+	 * @param x
+	 *            X-Koordinate
+	 * @param y
+	 *            Y-Koordinate
 	 */
-	public Punkt(double x, double y){
+	public Punkt(double x, double y) {
 		xKoord = x;
 		yKoord = y;
 		zKoord = 0;
@@ -26,28 +29,34 @@ public class Punkt {
 
 	/**
 	 * Konstruktor zu Erstellung eines Punktes im Raum
+	 * 
 	 * @param x
 	 * @param y
 	 * @param z
 	 */
-	public Punkt(double x, double y, double z){
+	public Punkt(double x, double y, double z) {
 		xKoord = x;
 		yKoord = y;
 		zKoord = z;
 	}
-	
+
 	/**
 	 * Berechnet die Distanz zwischen zwei Punkten
-	 * @param X erster Punkt
-	 * @param Y zweiter Punkt
+	 * 
+	 * @param X
+	 *            erster Punkt
+	 * @param Y
+	 *            zweiter Punkt
 	 * @return Länge als double
 	 */
-	public static double dist(Punkt X, Punkt Y){
-		return Math.sqrt(Math.pow(X.getxKoord()-Y.getxKoord(),2)+Math.pow(X.getyKoord()-Y.getyKoord(),2)+Math.pow(X.getzKoord()-Y.getzKoord(),2));
+	public static double dist(Punkt X, Punkt Y) {
+		return Math.sqrt(Math.pow(X.getxKoord() - Y.getxKoord(), 2) + Math.pow(X.getyKoord() - Y.getyKoord(), 2)
+				+ Math.pow(X.getzKoord() - Y.getzKoord(), 2));
 	}
 
 	/**
 	 * Getter Methode zur Ausgabe der X-Koordinate
+	 * 
 	 * @return X-Koordinate als Double
 	 */
 	public double getxKoord() {
@@ -56,14 +65,17 @@ public class Punkt {
 
 	/**
 	 * Setter Methode zum Setzen der X-Koordinate
-	 * @param xKoord X-Koordinate
+	 * 
+	 * @param xKoord
+	 *            X-Koordinate
 	 */
 	public void setxKoord(double xKoord) {
 		this.xKoord = xKoord;
 	}
-	
+
 	/**
 	 * Getter Methode zur Ausgabe der Y-Koordinate
+	 * 
 	 * @return Y-Koordinate als Double
 	 */
 	public double getyKoord() {
@@ -72,14 +84,17 @@ public class Punkt {
 
 	/**
 	 * Setter Methode zum Setzen der Y-Koordinate
-	 * @param yKoord Y-Koordinate
+	 * 
+	 * @param yKoord
+	 *            Y-Koordinate
 	 */
 	public void setyKoord(double yKoord) {
 		this.yKoord = yKoord;
 	}
-	
+
 	/**
 	 * Getter Methode zur Ausgabe der Z-Koordinate
+	 * 
 	 * @return Z-Koordinate als Double
 	 */
 	public double getzKoord() {
@@ -88,20 +103,20 @@ public class Punkt {
 
 	/**
 	 * Setter Methode zum Setzen der Z-Koordinate
-	 * @param xKoord Z-Koordinate
+	 * 
+	 * @param xKoord
+	 *            Z-Koordinate
 	 */
 	public void setzKoord(double zKoord) {
 		this.zKoord = zKoord;
 	}
 
-	/** 
+	/**
 	 * Formatierte Ausgabe eines Punktes
 	 */
 	@Override
 	public String toString() {
 		return "Punkt [X-Koordinate=" + xKoord + ", Y-Koordinate=" + yKoord + ", Z-Koordinate=" + zKoord + "]";
 	}
-
-
 
 }

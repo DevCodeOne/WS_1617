@@ -2,6 +2,7 @@
 public class Vektor {
 
 	private double x = 0, y = 0, z = 0;
+
 	/**
 	 * Standartkonstruktor ohne werte
 	 */
@@ -19,7 +20,7 @@ public class Vektor {
 	 */
 	public Vektor(double x, double y) {
 		this.x = x;
-		this.y =y;
+		this.y = y;
 	}
 
 	/**
@@ -34,8 +35,8 @@ public class Vektor {
 	 */
 	public Vektor(double x, double y, double z) {
 		this.x = x;
-		this.y =y;
-		this.z=z;
+		this.y = y;
+		this.z = z;
 	}
 
 	/**
@@ -54,8 +55,9 @@ public class Vektor {
 
 	/**
 	 * Skalares Vielfaches
-	 * @param p 
-	 * 		Skalar
+	 * 
+	 * @param p
+	 *            Skalar
 	 * @return Vector
 	 */
 
@@ -83,7 +85,7 @@ public class Vektor {
 	 * @return Normale als Vector
 	 */
 	public static Vektor normGerade(Vektor v1) {
-		Vektor n = new Vektor(v1.getY(),v1.getX()*-1);
+		Vektor n = new Vektor(v1.getY(), v1.getX() * -1);
 		return n;
 	}
 
@@ -99,44 +101,55 @@ public class Vektor {
 
 	/**
 	 * Gibt die Länge eines Vectors aus
+	 * 
 	 * @return Länge als double
 	 */
-	public double laenge(){
-		return Math.sqrt(Math.pow(x, 2)+Math.pow(y, 2)+Math.pow(z, 2));		
+	public double laenge() {
+		return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
 	}
 
 	/**
 	 * Statische Methode für VektorProdukt/Kreuzprodukt
-	 * @param v1 Vektor 1
-	 * @param v2 Vektor 2
+	 * 
+	 * @param v1
+	 *            Vektor 1
+	 * @param v2
+	 *            Vektor 2
 	 * @return Vektor 3
 	 */
 
-	public static Vektor Vektorprodukt(Vektor v1, Vektor v2){
+	public static Vektor Vektorprodukt(Vektor v1, Vektor v2) {
 		Vektor v3 = new Vektor();
-		v3.setX(v1.getY()*v2.getZ()-v1.getZ()*v2.getY());
-		v3.setY(v1.getZ()*v2.getX()-v1.getX()*v2.getZ());
-		v3.setZ(v1.getX()*v2.getY()-v1.getY()*v2.getX());
+		v3.setX(v1.getY() * v2.getZ() - v1.getZ() * v2.getY());
+		v3.setY(v1.getZ() * v2.getX() - v1.getX() * v2.getZ());
+		v3.setZ(v1.getX() * v2.getY() - v1.getY() * v2.getX());
 		return v3;
 	}
+
 	/**
 	 * Liefert den Winkel zwischen zwei Vektoren
-	 * @param v1 Vektor 1
-	 * @param v2 Vektor 2
+	 * 
+	 * @param v1
+	 *            Vektor 1
+	 * @param v2
+	 *            Vektor 2
 	 * @return Winkel dazwischen
 	 */
-	public static double Zwischenwinkel(Vektor v1, Vektor v2){
-		return ((Math.acos(v1.scalarProd(v2)/(v1.laenge()*v2.laenge()))/(2*Math.PI))*360);
+	public static double Zwischenwinkel(Vektor v1, Vektor v2) {
+		return ((Math.acos(v1.scalarProd(v2) / (v1.laenge() * v2.laenge())) / (2 * Math.PI)) * 360);
 	}
 
 	/**
 	 * Orthogonalprojektion von v1 auf v2
-	 * @param v1 Vektor 1
-	 * @param v2 Vektor 2
+	 * 
+	 * @param v1
+	 *            Vektor 1
+	 * @param v2
+	 *            Vektor 2
 	 * @return vektor
 	 */
-	public static Vektor Orthogonalprojektion(Vektor v1, Vektor v2){
-		return v2.mult(v1.scalarProd(v2)/Math.pow(v2.laenge(),2));
+	public static Vektor Orthogonalprojektion(Vektor v1, Vektor v2) {
+		return v2.mult(v1.scalarProd(v2) / Math.pow(v2.laenge(), 2));
 
 	}
 
@@ -202,7 +215,5 @@ public class Vektor {
 	public String toString() {
 		return "Vector [x=" + x + ", y=" + y + ", z=" + z + "]";
 	}
-	
-	
 
 }
