@@ -2,6 +2,7 @@
 public class Gerade {
 	private Punkt p;
 	private Vektor v;
+	double a, b, c;
 
 	/**
 	 * Gerade vom Nullpunkt aus.
@@ -12,6 +13,7 @@ public class Gerade {
 	public Gerade(Vektor v) {
 		this.p = new Punkt();
 		this.v = v;
+
 	}
 
 	/**
@@ -45,8 +47,31 @@ public class Gerade {
 	 * Schnitt, Abstand, orientierter Abstand zwischen Punkten und einer Gerade
 	 * usw. enthalten
 	 */
-	public Punkt Schnittgerade(Gerade g1, Gerade g2) {
+	/**
+	 * Schnittpunkt zwischen einer Geraden und einem Punkt
+	 * 
+	 * @param p1
+	 *            Punkt
+	 * @return Boolean schneidet oder nicht
+	 */
+	public boolean Schnitt(Punkt p1) {
+		if (Math.abs(Vektor.scalarProd(new Vektor(p, p1), Vektor.normGerade(v))) <= Double.MAX_VALUE)
+			return true;
+		return false;
+	}
 
+	public void setImp() {
+		if (v.getY() == 0 && v.getX() != 0) {
+			a = 0;
+			b = 1;
+			c = -p.getyKoord();
+		} else if (v.getY() != 0) {
+			a = 1;
+			b = -(v.getX() / v.getY());
+			c = (v.getX() / v.getY()) * p.getyKoord() - p.getxKoord();
+		} else {
+			System.out.println("Kein Vektor");
+		}
 	}
 
 	public Punkt getP() {
@@ -55,6 +80,7 @@ public class Gerade {
 
 	public void setP(Punkt p) {
 		this.p = p;
+		this.setImp();
 	}
 
 	public Vektor getV() {
@@ -63,11 +89,14 @@ public class Gerade {
 
 	public void setV(Vektor v) {
 		this.v = v;
+		this.setImp();
 	}
 
 	@Override
 	public String toString() {
-		return "Gerade [p=" + p + ", v=" + v + "]";
+		this.setImp();
+		return "Gerade [p=" + p + ", v=" + v + "]" + "\n" + "impl. Darstellung: " + a + "*x + " + b + "*y " + c
+				+ " = 0";
 	}
 
 }

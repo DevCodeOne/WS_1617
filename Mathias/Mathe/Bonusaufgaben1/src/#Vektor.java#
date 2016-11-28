@@ -35,23 +35,8 @@ public class Vektor {
 	 */
 	public Vektor(double x, double y, double z) {
 		this.x = x;
-		this.y = y;
+      		this.y = y;
 		this.z = z;
-	}
-
-	/**
-	 * Vektor aus zwei Punkten
-	 * 
-	 * @param p1
-	 *            Punkt 1
-	 * @param p2
-	 *            Punkt 2
-	 */
-
-	public Vektor(Punkt p1, Punkt p2) {
-		this.x = p2.getxKoord() - p1.getxKoord();
-		this.y = p2.getyKoord() - p1.getyKoord();
-		this.z = p2.getzKoord() - p2.getzKoord();
 	}
 
 	/**
@@ -90,8 +75,8 @@ public class Vektor {
 	 *            Vector
 	 * @return doublewert
 	 */
-	public static double scalarProd(Vektor v1, Vektor v2) {
-		return (v1.getX() * v2.getX() + v1.getY() * v2.getY() + v1.getZ() * v2.getZ());
+	public double scalarProd(Vektor v) {
+		return (this.getX() * v.getX() + this.getY() * v.getY() + this.getZ() * v.getZ());
 	}
 
 	/**
@@ -115,16 +100,16 @@ public class Vektor {
 	}
 
 	/**
-	 * Gibt die L√§nge eines Vectors aus
+	 * Gibt die LÅ‰nge eines Vectors aus
 	 * 
-	 * @return L√§nge als double
+	 * @return LÅ‰nge als double
 	 */
 	public double laenge() {
 		return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
 	}
 
 	/**
-	 * Statische Methode f√ºr VektorProdukt/Kreuzprodukt
+	 * Statische Methode fÅ¸r VektorProdukt/Kreuzprodukt
 	 * 
 	 * @param v1
 	 *            Vektor 1
@@ -151,7 +136,7 @@ public class Vektor {
 	 * @return Winkel dazwischen
 	 */
 	public static double Zwischenwinkel(Vektor v1, Vektor v2) {
-		return ((Math.acos(Vektor.scalarProd(v1, v2) / (v1.laenge() * v2.laenge())) / (2 * Math.PI)) * 360);
+		return ((Math.acos(v1.scalarProd(v2) / (v1.laenge() * v2.laenge())) / (2 * Math.PI)) * 360);
 	}
 
 	/**
@@ -164,7 +149,7 @@ public class Vektor {
 	 * @return vektor
 	 */
 	public static Vektor Orthogonalprojektion(Vektor v1, Vektor v2) {
-		return v2.mult(Vektor.scalarProd(v1, v2) / Math.pow(v2.laenge(), 2));
+		return v2.mult(v1.scalarProd(v2) / Math.pow(v2.laenge(), 2));
 
 	}
 

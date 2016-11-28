@@ -56,7 +56,7 @@ public class VektorTest {
 	public void Skalarprodukt() {
 		Vektor v1 = new Vektor(3.0, 2.3, 1.1);
 		Vektor v2 = new Vektor(3.0, 2.3, 1.1);
-		assertTrue(v1.scalarProd(v2) == 15.5);
+		assertTrue(Vektor.scalarProd(v1,v2) == 15.5);
 	}
 
 	@Test
