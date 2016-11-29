@@ -15,19 +15,19 @@ public:
     double Real() const;
     double Imag() const;
     std::string Name() const;
-    void Real(const double& r);
-    void Imag(const double& i);
-    void Name(const std::string& name);
+    void Real(double r);
+    void Imag(double i);
+    void Name(std::string name);
     bool isReal() const;
     bool isImag() const;
     void add(const ComplexNumber& c);
-    static ComplexNumber add(ComplexNumber& c1,const ComplexNumber& c2);
+    static ComplexNumber add(const ComplexNumber& c1,const ComplexNumber& c2);
     std::string toString() const;
     std::string toSVG() const;
     std::string Color() const;
     int SVGRadius() const;
-    void Color(const std::string& c);
-    void SVGRadius(const int& r);
+    void Color(const std::string c);
+    void SVGRadius(const int r);
 
 
 private:
@@ -39,8 +39,8 @@ private:
 };
 std::ostream& operator<<(std::ostream& outs, const ComplexNumber& c);
 ComplexNumber& operator+=(ComplexNumber& c1, const ComplexNumber& c2);
-ComplexNumber operator+(ComplexNumber& c1, const ComplexNumber& c2);
-bool operator==(ComplexNumber& c1, const ComplexNumber& c2);
-bool operator!=(ComplexNumber& c1, const ComplexNumber& c2);
+ComplexNumber operator+(const ComplexNumber& c1, const ComplexNumber& c2);
+bool operator==(const ComplexNumber& c1, const ComplexNumber& c2);
+bool operator!=(const ComplexNumber& c1, const ComplexNumber& c2);
 // COMPLEXNUMBER_H
 

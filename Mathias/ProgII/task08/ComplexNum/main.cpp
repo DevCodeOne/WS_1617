@@ -3,7 +3,7 @@
 #include "svgfile.h"
 #include <iostream>
 #include <cassert>
-
+extern bool testing;
 
 int main(){
     SVGFile svg("SVGDatei.svg");

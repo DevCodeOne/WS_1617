@@ -12,6 +12,8 @@ ComplexNumber::ComplexNumber(double Real):mReal(Real), mImag(0.0)
 {
 }*/
 
+bool testing {false};
+
 ComplexNumber::ComplexNumber(double Real,double Imag, std::string name) :mReal(Real),mImag(Imag),mName(name)
 {
     /*std::cout
@@ -50,15 +52,15 @@ std::string ComplexNumber::Name() const{
     return mName;
 }
 
-void ComplexNumber::Real(const double& r){
+void ComplexNumber::Real(double r){
     mReal = r;
 }
 
-void ComplexNumber::Imag(const double& i){
+void ComplexNumber::Imag(double i){
     mImag = i;
 }
 
-void ComplexNumber::Name(const std::string& name){
+void ComplexNumber::Name(std::string name){
     mName = name;
 }
 
@@ -78,7 +80,7 @@ void ComplexNumber::add(const ComplexNumber& c){
     mImag += c.mImag;
 }
 
-ComplexNumber ComplexNumber::add(ComplexNumber& c1,const ComplexNumber& c2){
+ComplexNumber ComplexNumber::add(const ComplexNumber& c1,const ComplexNumber& c2){
     //std::cout << __PRETTY_FUNCTION__ << std::endl;
     ComplexNumber sum = c1;
     sum.add(c2);
@@ -93,28 +95,7 @@ std::string ComplexNumber::toString() const{
     return ret;
 }
 
-std::ostream& operator<<(std::ostream& outs, const ComplexNumber& c){
-    outs << c.toString();
-    return outs;
-}
 
-ComplexNumber& operator+=(ComplexNumber& c1, const ComplexNumber& c2){
-    c1.add(c2);
-    return c1;
-}
-
-ComplexNumber operator+(ComplexNumber& c1, const ComplexNumber& c2){
-    return ComplexNumber::add(c1,c2); // geht das so?!
-}
-
-bool operator==(ComplexNumber& c1, const ComplexNumber& c2){
-    if ((c1.Real()==c2.Real())&(c1.Imag()==c2.Imag())) return true;
-    return false;
-}
-
-bool operator!=(ComplexNumber& c1, const ComplexNumber& c2){
-    return !(c1==c2);
-}
 
 std::string ComplexNumber::toSVG() const
 {
@@ -135,12 +116,35 @@ int ComplexNumber::SVGRadius() const{
     return mSVGRadius;
 }
 
-void ComplexNumber::Color(const std::string& c){
+void ComplexNumber::Color(const std::string c){
     mColor = c;
 }
 
-void ComplexNumber::SVGRadius(const int& r){
+void ComplexNumber::SVGRadius(const int r){
     mSVGRadius = r;
+}
+
+std::ostream& operator<<(std::ostream& outs, const ComplexNumber& c){
+    outs << c.toString();
+    return outs;
+}
+
+ComplexNumber& operator+=(ComplexNumber& c1, const ComplexNumber& c2){
+    c1.add(c2);
+    return c1;
+}
+
+ComplexNumber operator+(const ComplexNumber& c1, const ComplexNumber& c2){
+    return ComplexNumber::add(c1,c2); // geht das so?!
+}
+
+bool operator==(const ComplexNumber& c1, const ComplexNumber& c2){
+    if ((c1.Real()==c2.Real())&(c1.Imag()==c2.Imag())) return true;
+    return false;
+}
+
+bool operator!=(const ComplexNumber& c1, const ComplexNumber& c2){
+    return !(c1==c2);
 }
 
 SIMPLETEST("Standartkonstruktor") {
