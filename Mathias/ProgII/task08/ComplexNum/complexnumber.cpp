@@ -27,6 +27,11 @@ ComplexNumber::ComplexNumber(double Real,double Imag, std::string name) :mReal(R
             << std::endl;
    std::cout << __PRETTY_FUNCTION__ << std::endl;*/
 }
+
+ComplexNumber::ComplexNumber(const ComplexNumber& c) :ComplexNumber(c.mReal,c.mImag,c.mName)
+{
+
+}
 ComplexNumber::~ComplexNumber(){
     /*std::cout
             << "Ende ComplexNumber: "
@@ -129,13 +134,52 @@ std::ostream& operator<<(std::ostream& outs, const ComplexNumber& c){
     return outs;
 }
 
+ComplexNumber operator+(const ComplexNumber& c1){
+    return ComplexNumber (c1.Real(),c1.Imag());
+}
+
+ComplexNumber operator-(const ComplexNumber& c1){
+    return ComplexNumber(-c1.mReal,-c1.mImag);
+}
+
 ComplexNumber& operator+=(ComplexNumber& c1, const ComplexNumber& c2){
     c1.add(c2);
     return c1;
 }
 
+ComplexNumber& operator-=(ComplexNumber& c1, const ComplexNumber& c2){
+    c1.mReal-=c2.mReal;
+    c1.mImag-=c2.mImag;
+    return c1;
+}
+
+ComplexNumber& operator*=(ComplexNumber& c1, const ComplexNumber& c2){
+    c1.mReal=c1.mReal*c2.mReal-c1.mImag*c2.mImag;
+    c1.mImag=c1.mReal*c2.mImag-c1.mImag*c2.mReal;
+    return c1;
+}
+
+ComplexNumber& operator/=(ComplexNumber& c1, const ComplexNumber& c2){
+    c1.mReal = (c1.mReal*c2.mReal+c1.mImag*c2.mImag)/(c2.mReal*c2.mReal+c2.mImag+c2.mImag);
+    c1.mImag = (c1.mImag*c2.mReal-c1.mReal*c2.mImag)/(c2.mReal*c2.mReal+c2.mImag+c2.mImag);
+    return c1;
+}
+
 ComplexNumber operator+(const ComplexNumber& c1, const ComplexNumber& c2){
-    return ComplexNumber::add(c1,c2); // geht das so?!
+    return ComplexNumber(c1) +=c2;
+
+}
+
+ComplexNumber operator-(const ComplexNumber& c1, const ComplexNumber& c2){
+     return c1-=c2;
+}
+
+ComplexNumber operator*(const ComplexNumber& c1, const ComplexNumber& c2){
+     return c1*=c2;
+}
+
+ComplexNumber operator/(const ComplexNumber& c1, const ComplexNumber& c2){
+     return c1/=c2;
 }
 
 bool operator==(const ComplexNumber& c1, const ComplexNumber& c2){
@@ -145,6 +189,7 @@ bool operator==(const ComplexNumber& c1, const ComplexNumber& c2){
 
 bool operator!=(const ComplexNumber& c1, const ComplexNumber& c2){
     return !(c1==c2);
+
 }
 
 SIMPLETEST("Standartkonstruktor") {

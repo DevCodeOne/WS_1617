@@ -109,9 +109,6 @@ public class HochschulApp_d {
 				rs1 = s1.executeQuery("select * from Fachbereich");
 				ausgeben(rs1);
 				ps1.setInt(10, Integer.parseInt(sc.nextLine()));
-
-				// ,einstelldatum DATE, fachgebiet VARCHAR(30), fachbereich
-				// VARCHAR(30)
 				System.out.println("Zeilen wurden geändert:" + ps1.executeUpdate());
 				conn.commit();
 				break;

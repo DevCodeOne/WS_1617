@@ -5,12 +5,21 @@
 
 class ComplexNumber
 {
+    friend ComplexNumber& operator-=(ComplexNumber& c1, const ComplexNumber& c2);
+    friend ComplexNumber& operator*=(ComplexNumber& c1, const ComplexNumber& c2);
+    friend ComplexNumber& operator/=(ComplexNumber& c1, const ComplexNumber& c2);
+    friend ComplexNumber operator+(const ComplexNumber& c1);
+    friend ComplexNumber operator-(const ComplexNumber& c1);
+   /*friend ComplexNumber operator-(const ComplexNumber& c1, const ComplexNumber& c2);
+   friend ComplexNumber operator*(const ComplexNumber& c1, const ComplexNumber& c2);
+   friend ComplexNumber operator/(const ComplexNumber& c1, const ComplexNumber& c2);*/
 public:
     //ComplexNumber();
     //ComplexNumber(double real);
     //ComplexNumber(double real,double Imag);
     ComplexNumber(double Real = 0.0, double Imag = 0.0, std::string name =""); //damit kann ich entweder den einen(Real) oder beide nehmen
     // Vorteil direkt Deklaration sobald das OBJ erstellt wird?!
+    ComplexNumber(const ComplexNumber& c);
     ~ComplexNumber();
     double Real() const;
     double Imag() const;

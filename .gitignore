@@ -17,3 +17,4 @@ Mathias/ProgII/build*
 *.classpath
 *.project
 *.pro
+*.user
