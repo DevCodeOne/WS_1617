@@ -54,7 +54,7 @@ class gaus_matrix {
 
         // TODO implement error handling
         void solve(index_type start) {
-            if (start == rows) return;
+            if (start == std::min(rows, cols)) return;
 
             index_type not_found = n_pos;
             // sort the rows so that the row with the first leading 
