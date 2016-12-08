@@ -12,6 +12,9 @@ int main() {
 	encoded_string.erase(std::remove(encoded_string.begin(), encoded_string.end(), ' '), encoded_string.end());
 	decoded_string.erase(std::remove(decoded_string.begin(), decoded_string.end(), ' '), decoded_string.end());
 
+	std::string to_decode2 = "0 1 2 3 4 5 6 0";
+	std::cout << "Result : " << decode_string(to_decode2, {"0", "1"}) << std::endl;
+
 	std::cout << "String to encode : " << to_encode << std::endl;
 	std::cout << "Encoded String :   " << encoded_string << std::endl;
 	std::cout << "Decoded String :   " << decoded_string << std::endl;
