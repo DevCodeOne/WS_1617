@@ -16,13 +16,13 @@ std::string encode_string(std::string to_encode, std::initializer_list<std::stri
 	while (init_directory_it != init_directory.end())
 		directory.insert({*init_directory_it++, next_key++});
 
-	auto it = to_encode.begin();
+	auto input_it = to_encode.begin();
 
 	std::string input;
 	std::ostringstream encoded_string;
 
-	while (it != to_encode.end()) {
-		input += *it;
+	while (input_it != to_encode.end()) {
+		input += *input_it;
 
 		if (directory.find(input) == directory.end()) {
 			directory.insert({input, next_key++});
@@ -32,8 +32,7 @@ std::string encode_string(std::string to_encode, std::initializer_list<std::stri
 			input = new_input;
 		}
 
-		// encode the rest
-		if (++it == to_encode.end())
+		if (++input_it == to_encode.end())
 			encoded_string << directory[input] << " ";
 	}
 
@@ -63,14 +62,12 @@ std::string decode_string(std::string to_decode, std::initializer_list<std::stri
 	while (to_decode_stream >> in_character) {
 		decoded_string << decoded_symbols[in_character] << " ";
 
-		for (char c : decoded_symbols[in_character]) {
-			input += c;
-			if (directory.find(input) == directory.end()) {
-				directory.insert({input, next_key++});
-				decoded_symbols.push_back(input);
-				input = c;		
-			}
-		}
+                input += decoded_symbols[in_character][0];
+                if (directory.find(input) == directory.end()) {
+                    directory.insert({input, next_key++});
+                    decoded_symbols.push_back(input);
+                    input = decoded_symbols[in_character];
+                }
 
 	}
 

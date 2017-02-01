@@ -1,5 +1,6 @@
 #include <iostream>
 #include <array>
+#include <vector>
 #include <algorithm>
 
 #include <cstdlib>
@@ -15,9 +16,9 @@ class gaus_matrix {
         const index_type cols = m;
         const index_type n_pos = n > m ? n : m;
 
-        static constexpr float epsilon = std::numeric_limits<double>::epsilon();
+        static constexpr double epsilon = std::numeric_limits<double>::epsilon();
 
-        gaus_matrix() :data{} { }
+        gaus_matrix() : data{} { }
 
         std::array<double, m> &operator[](index_type index) {
             return data[index];
@@ -39,7 +40,7 @@ class gaus_matrix {
             return n_pos;
         }
 
-        void scale_and_add(index_type src, index_type dst, float scale) {
+        void scale_and_add(index_type src, index_type dst, double scale) {
             if (dst == src) return;
 
             auto src_it = data[src].begin(); 
@@ -52,8 +53,36 @@ class gaus_matrix {
             }
         }
 
+        void scale(index_type src, double scale) {
+            std::transform(data[src].begin(), data[src].end(), data[src].begin(), 
+                    [scale](double val) { 
+                        return val * scale; 
+                    });
+        }
+
+        void solve() {
+            row_echolon_form(0);
+        }
+
+    private : 
+
+        // TODO check
+        bool is_in_row_echolon_form() {
+            auto it = data.begin(); 
+            index_type pivot = gaus_matrix::find_pivot(*it, n_pos);
+
+            while (++it != data.end()) {
+                index_type new_pivot = gaus_matrix::find_pivot(*it, n_pos);
+
+                if (pivot < new_pivot)
+                    return false;
+                
+                pivot = new_pivot;
+            }
+        }
+        
         // TODO implement error handling
-        void solve(index_type start) {
+        void row_echolon_form(index_type start) {
             if (start == std::min(rows, cols)) return;
 
             index_type not_found = n_pos;
@@ -72,20 +101,25 @@ class gaus_matrix {
             for (index_type i = start + 1; i < rows; i++) {
                 index_type curr_pivot = find_pivot(i); 
 
-                if (curr_pivot == pivot) {
-                    // pivot * x = -curr_pivot; | / pivot
-                    // x = - curr_pivot / pivot;
-                    scale_and_add(start, i, -(data[i][curr_pivot] / data[start][pivot]));
-                }
+                // if there's no pivot element in this row then there will be no 
+                // pivot element in this column in some row later on, because the rows 
+                // have been sorted by the position of the row's pivot element.
+                if (curr_pivot != pivot) 
+                    break;
+                
+                // pivot * x = -curr_pivot; | / pivot
+                // x = - curr_pivot / pivot;
+                scale_and_add(start, i, -(data[i][curr_pivot] / data[start][pivot]));
             }
 
-            std::cout << (*this) << std::endl;
-
-            solve(start + 1);
+            row_echolon_form(start + 1);
         }
 
-    private : 
-        std::array<std::array<double, m>, n> data;
+        void reduced_echolon_form(index_type start) {
+
+        }
+
+        std::vector<std::array<double, m>> data;
 
 };
 
@@ -120,7 +154,9 @@ int main() {
     mat[2][2] = 2;
     mat[2][3] = -3;
   
-    mat.solve(0);
+    mat.solve();
+
+    std::cout << mat << std::endl;
 
     return EXIT_SUCCESS;
 }
