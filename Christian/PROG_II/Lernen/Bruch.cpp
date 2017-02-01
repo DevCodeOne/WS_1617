@@ -7,7 +7,7 @@
 namespace bruchrechnung {
 
     // Definition der statischen Klassenvariable
-    int bruch::class_id = 0;
+    const int bruch::class_id = 0;
 
     // Definition der extern Variable im Header
     // benutzt man, wenn die Variable Programmweit bekannt sein soll
